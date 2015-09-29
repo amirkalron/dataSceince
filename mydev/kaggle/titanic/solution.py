@@ -3,11 +3,12 @@ import numpy as np
 import pandas as pandas
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
-from solutionHelper import fixData
+from solutionHelper import normalizeData
 from solutionHelper import getPredictors
 
 #init predicators
 predictors = getPredictors()
+
 algType = "Random forest"
 print "solution using : " + algType
 
@@ -15,7 +16,7 @@ print "solution using : " + algType
 # fix train data + predict on train data with cross validation
 ##############################
 titanic = pandas.read_csv("train.csv")
-fixData(titanic)
+normalizeData(titanic)
 
 #just estimate prediction rate
 alg = RandomForestClassifier(random_state=1, n_estimators=150, min_samples_split=4, min_samples_leaf=2)
@@ -26,7 +27,7 @@ print scores.mean()
 # fix test data + predict on test data
 ###########################################
 titanic_test = pandas.read_csv("test.csv") 
-fixData(titanic_test)
+normalizeData(titanic_test)
 
 #train + predict
 #alg = LogisticRegression(random_state=1)
