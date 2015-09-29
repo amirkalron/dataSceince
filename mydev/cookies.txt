@@ -1,0 +1,14 @@
+# HTTP Cookie File for domains related to kaggle.com.
+# This content may be downloaded or pasted into a cookies.txt file and used by wget
+# Example:  wget -x --load-cookies cookies.txt https://www.kaggle.com/forums/f/15/kaggle-forum/t/6604/downloading-data-via-command-line
+#
+.kaggle.com	TRUE	/	TRUE	1504868384.75149	.ASPXAUTH	E0322A07DFDB3B936DBB861F296A9B330A9BA5B8129B41D6BFAEA475F49947101C7C21AE273149D036814947D3A953B1D787D735B3A21FD4733E3787BA037B2E2DD818605482F7BD88C65DD92A63D0CF27A6D11C
+.blog.kaggle.com	TRUE	/	FALSE	1505813877	__utma	176227318.1367845733.1442741233.1442741233.1442741233.1
+.blog.kaggle.com	TRUE	/	FALSE	0	__utmc	176227318
+.blog.kaggle.com	TRUE	/	FALSE	1458509877	__utmz	176227318.1442741233.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+www.kaggle.com	FALSE	/	FALSE	0	__RequestVerificationToken	ADsJBcyCeIqYSw9rJ-6h9moRm7HK-FTU1emgBR_4ZjdkVj1KmSE4SM2MnOXAMYVNdWxPqYq7GVGAW7PCONSZuIE5w7U1
+.www.kaggle.com	TRUE	/	FALSE	0	ARRAffinity	ec8c6570ebf1aeb294a1d1705194c0e86b485396a7a974e599f249a69392380a
+.kaggle.com	TRUE	/	FALSE	1506163514	__utma	158690720.1820067497.1441709920.1443090318.1443091063.9
+.kaggle.com	TRUE	/	FALSE	1443093314	__utmb	158690720.2.10.1443091063
+.kaggle.com	TRUE	/	FALSE	0	__utmc	158690720
+.kaggle.com	TRUE	/	FALSE	1458859514	__utmz	158690720.1443091063.9.5.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)
