@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pandas
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectKBest, f_classif
 from solutionHelper import normalizeData
 from solutionHelper import getPredictors
 
@@ -22,6 +23,16 @@ normalizeData(titanic)
 alg = RandomForestClassifier(random_state=1, n_estimators=150, min_samples_split=4, min_samples_leaf=2)
 scores = sklearn.cross_validation.cross_val_score(alg, titanic[predictors], titanic["Survived"], cv=3)
 print scores.mean()
+
+
+selector = SelectKBest(f_classif, k=5) 
+selector.fit(titanic[predictors], titanic["Survived"]) 
+scores = -np.log10(selector.pvalues_) 
+
+plt.bar(range(len(predictors)), scores) 
+plt.xticks(range(len(predictors)), predictors, rotation='vertical')
+plt.show()
+
 
 ###########################################
 # fix test data + predict on test data
