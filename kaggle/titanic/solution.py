@@ -1,3 +1,4 @@
+
 import csv as csv
 import numpy as np
 import pandas as pandas
@@ -9,10 +10,9 @@ from solutionHelper import normalizeData
 from solutionHelper import getPredictors
 from solutionHelper import getAlgs
 
-#init predicators
-algType = "Random forest+GradientBoostingClassifier+LogisticRegression"
-print "solution using : " + algType
-value_column="Survived"
+###################################
+# learnning some python and Data Sceince on kaggle titanic data set
+##################################
 
 ##############################
 # fix train data + predict on train data with cross validation
@@ -20,12 +20,15 @@ value_column="Survived"
 trainData = pandas.read_csv("train.csv")
 normalizeData(trainData)
 
-#just estimate prediction rate
+# Estimate prediction rate
 algs = getAlgs()
-for alg,p,w in algs: 
+names = [ i[0]  for i in algs]
+print "solution using : " + "".join(names)
+value_column="Survived"
+
+for name,alg,p,w in algs: 
         score = sklearn.cross_validation.cross_val_score(alg, trainData[p], trainData[value_column], cv=3)
         print score.mean()
-
 
 ###########################################
 # fix test data + predict on test data
@@ -36,12 +39,12 @@ normalizeData(testData)
 #train + predict
 full_predictions = [0]*len(testData)
 algs = getAlgs()
-for alg,p,w in algs:
+for name,alg,p,w in algs:
 	alg.fit(trainData[p], trainData[value_column])
 	predictions = alg.predict_proba(testData[p].astype(float))[:,1]
         full_predictions =full_predictions +  predictions * w
 
-totalW = 4
+totalW = sum([ i[3] for i in algs ])
 full_predictions = full_predictions / totalW 
 full_predictions[full_predictions <= .5] = 0 
 full_predictions[full_predictions > .5] = 1
