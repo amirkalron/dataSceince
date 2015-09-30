@@ -1,13 +1,22 @@
 import re
 import operator
 import pandas as pandas
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.feature_selection import SelectKBest, f_classif
+from matplotlib.backends.backend_pdf import PdfPages
+
+#static init
+matplotlib.use('Agg')
 
 ###########################################
 # Common Data Sceince functions ##########
 ##########################################
+
 def normalizeData(data):
 	data["Age"]=data["Age"].fillna(data["Age"].median())
 	data["Fare"]=data["Fare"].fillna(data["Fare"].median())
@@ -32,8 +41,16 @@ def getAlgs():
 	  	 ["gradient boosting",GradientBoostingClassifier(random_state=1, n_estimators=25, max_depth=3),getPredictors(),4],
 	  	 ["logistic regression",LogisticRegression(random_state=1),getPredictors(),1]]
 def analysFeatures(data):
-	 predictors = getPredictors();
-
+	predictors = getPredictors();
+	selector = SelectKBest(f_classif, k=5)
+	selector.fit(data[predictors], data["Survived"])
+	scores = -np.log10(selector.pvalues_)
+	with PdfPages('predictors_pdf.pdf') as pdf:
+		plt.switch_backend('agg') 
+		plt.bar(range(len(predictors)), scores) 
+		plt.xticks(range(len(predictors)), predictors, rotation='vertical')
+		pdf.savefig()
+		plt.close()
 
 #################################
 # data specific functions ####### 

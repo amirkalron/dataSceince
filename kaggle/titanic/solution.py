@@ -3,12 +3,13 @@ import csv as csv
 import numpy as np
 import pandas as pandas
 import sklearn
+import matplotlib
 from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_selection import SelectKBest, f_classif
-from solutionHelper import normalizeData
-from solutionHelper import getPredictors
-from solutionHelper import getAlgs
+from solutionHelper import *
+
+matplotlib.use('Agg')
 
 ###################################
 # learnning some python and Data Sceince on kaggle titanic data set
@@ -19,6 +20,9 @@ from solutionHelper import getAlgs
 ##############################
 trainData = pandas.read_csv("train.csv")
 normalizeData(trainData)
+
+#analyze features
+analysFeatures(trainData)
 
 # Estimate prediction rate
 algs = getAlgs()
