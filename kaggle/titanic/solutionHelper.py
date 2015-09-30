@@ -29,8 +29,8 @@ def getPredictors():
 	return ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked","FamilySize", "Title", "FamilyId"]
 
 def getAlgs():
-	return  [["ranodom forest",RandomForestClassifier(random_state=1, n_estimators=150, min_samples_split=4, min_samples_leaf=2),getPredictors(),2],
-	  	 ["gradient boosting",GradientBoostingClassifier(random_state=1, n_estimators=25, max_depth=3),getPredictors(),1],
+	return  [["ranodom forest",RandomForestClassifier(random_state=1, n_estimators=150, min_samples_split=4, min_samples_leaf=2),getPredictors(),10],
+	  	 ["gradient boosting",GradientBoostingClassifier(random_state=1, n_estimators=25, max_depth=3),getPredictors(),4],
 	  	 ["logistic regression",LogisticRegression(random_state=1),getPredictors(),1]]
 
 #################################
