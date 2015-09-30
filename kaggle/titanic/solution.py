@@ -42,7 +42,7 @@ algs = getAlgs()
 for name,alg,p,w in algs:
 	alg.fit(trainData[p], trainData[value_column])
 	predictions = alg.predict_proba(testData[p].astype(float))[:,1]
-        full_predictions =full_predictions +  predictions * w
+	full_predictions =full_predictions +  predictions * w
 
 totalW = sum([ i[3] for i in algs ])
 full_predictions = full_predictions / totalW 

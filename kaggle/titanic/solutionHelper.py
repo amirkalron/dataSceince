@@ -8,30 +8,32 @@ from sklearn.linear_model import LogisticRegression
 ###########################################
 # Common Data Sceince functions ##########
 ##########################################
-def normalizeData(titanic):
-	titanic["Age"]=titanic["Age"].fillna(titanic["Age"].median())
-	titanic["Fare"]=titanic["Fare"].fillna(titanic["Fare"].median())
-	titanic.loc[titanic["Sex"] == "male", "Sex"] = 0
-	titanic.loc[titanic["Sex"] == "female", "Sex"] = 1
-	titanic["Embarked"] = titanic["Embarked"].fillna("S")
-	titanic.loc[titanic["Embarked"] == "S", "Embarked"] = 0
-	titanic.loc[titanic["Embarked"] == "C", "Embarked"] = 1
-	titanic.loc[titanic["Embarked"] == "Q", "Embarked"] = 2
-	titanic["FamilySize"] = titanic["SibSp"] + titanic["Parch"]	
-	titanic["NameLength"] = titanic["Name"].apply(lambda x: len(x))
-        titanic["Title"] = titanic["Name"].apply(lambda x: getTitle(x))	
+def normalizeData(data):
+	data["Age"]=data["Age"].fillna(data["Age"].median())
+	data["Fare"]=data["Fare"].fillna(data["Fare"].median())
+	data.loc[data["Sex"] == "male", "Sex"] = 0
+	data.loc[data["Sex"] == "female", "Sex"] = 1
+	data["Embarked"] = data["Embarked"].fillna("S")
+	data.loc[data["Embarked"] == "S", "Embarked"] = 0
+	data.loc[data["Embarked"] == "C", "Embarked"] = 1
+	data.loc[data["Embarked"] == "Q", "Embarked"] = 2
+	data["FamilySize"] = data["SibSp"] + data["Parch"]	
+	data["NameLength"] = data["Name"].apply(lambda x: len(x))
+        data["Title"] = data["Name"].apply(lambda x: getTitle(x))	
 	
- 	fId = titanic.apply(getFamilyId,axis=1)
-        fId[titanic["FamilySize"] < 3]=-1
-        titanic["FamilyId"]=fId
+ 	fId = data.apply(getFamilyId,axis=1)
+        fId[data["FamilySize"] < 3]=-1
+        data["FamilyId"]=fId
 
 def getPredictors():
-	return ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked","FamilySize", "Title", "FamilyId"]
-
+        return ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked","FamilySize", "Title", "FamilyId"]
 def getAlgs():
 	return  [["ranodom forest",RandomForestClassifier(random_state=1, n_estimators=150, min_samples_split=4, min_samples_leaf=2),getPredictors(),10],
 	  	 ["gradient boosting",GradientBoostingClassifier(random_state=1, n_estimators=25, max_depth=3),getPredictors(),4],
 	  	 ["logistic regression",LogisticRegression(random_state=1),getPredictors(),1]]
+def analysFeatures(data):
+	 predictors = getPredictors();
+
 
 #################################
 # data specific functions ####### 
