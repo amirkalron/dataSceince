@@ -23,12 +23,12 @@ normalizeData(trainData)
 # Estimate prediction rate
 algs = getAlgs()
 names = [ i[0]  for i in algs]
-print "solution using : " + "".join(names)
+print ("solution using : " + "".join(names))
 value_column="Survived"
 
 for name,alg,p,w in algs: 
         score = sklearn.cross_validation.cross_val_score(alg, trainData[p], trainData[value_column], cv=3)
-        print score.mean()
+        print (score.mean())
 
 ###########################################
 # fix test data + predict on test data
