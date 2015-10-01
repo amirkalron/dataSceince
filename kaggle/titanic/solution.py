@@ -1,4 +1,5 @@
-
+import matplotlib
+matplotlib.use('Agg')
 import csv as csv
 import numpy as np
 import pandas as pandas
@@ -9,7 +10,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_selection import SelectKBest, f_classif
 from solutionHelper import *
 
-matplotlib.use('Agg')
 
 ###################################
 # learnning some python and Data Sceince on kaggle titanic data set
