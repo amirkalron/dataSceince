@@ -18,7 +18,7 @@ from solutionHelper import *
 ##############################
 # fix train data + predict on train data with cross validation
 ##############################
-trainData = pandas.read_csv("train.csv")
+trainData = pandas.read_csv("input/train.csv")
 normalizeData(trainData)
 
 #analyze features
@@ -37,7 +37,7 @@ for name,alg,p,w in algs:
 ###########################################
 # fix test data + predict on test data
 ###########################################
-testData = pandas.read_csv("test.csv") 
+testData = pandas.read_csv("input/test.csv") 
 normalizeData(testData)
 
 #train + predict
@@ -60,4 +60,4 @@ submission = pandas.DataFrame({
         "Survived": full_predictions
     })
 
-submission.to_csv("prediction.csv",index=False)
+submission.to_csv("output/prediction.csv",index=False)

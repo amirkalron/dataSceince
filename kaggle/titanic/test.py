@@ -19,5 +19,19 @@ from solutionHelper import *
 # fix train data + predict on train data with cross validation
 ##############################
 trainData = pandas.read_csv("train.csv")
-print trainData['SibSp']
+# d = trainData.groupby("Survived").count()['Sex']/len(trainData.index)
+# print d
+
+normalizeData(trainData)
+g1 = trainData.groupby(["FareCategory","Pclass","Sex"],sort=True).agg({'Survived': 'count'})
+g2 = trainData.groupby(["FareCategory","Pclass","Sex"],sort=True).agg('size')
+print groupsSize[3]
+
+
+# 
+train1=trainData[:692]
+# train1.to_csv("test/train1.csv",index=False)
+# test1=trainData[693:]
+# test1.to_csv("test/test1.csv",index=False)
+
 
