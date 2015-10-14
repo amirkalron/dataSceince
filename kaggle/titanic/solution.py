@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_selection import SelectKBest, f_classif
 from solutionHelper import *
+from plot import plotClassifier
 
 
 ###################################
@@ -44,9 +45,10 @@ normalizeData(testData)
 full_predictions = [0]*len(testData)
 algs = getAlgs()
 for name,alg,p,w in algs:
-	alg.fit(trainData[p], trainData[value_column])
-	predictions = alg.predict_proba(testData[p].astype(float))[:,1]
-	full_predictions =full_predictions +  predictions * w
+    alg = alg.fit(trainData[p], trainData[value_column])
+    plotClassifier(alg,name)
+    predictions = alg.predict_proba(testData[p].astype(float))[:,1]
+    full_predictions = full_predictions +  predictions * w
 
 totalW = sum([ i[3] for i in algs ])
 full_predictions = full_predictions / totalW 

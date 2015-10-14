@@ -4,6 +4,7 @@ import operator
 import pandas as pandas
 import numpy as np
 
+
 def substringsLocations_in_string(big_string, substrings):
     for i,substring in enumerate(substrings):
         if not pandas.isnull(big_string) and string.find(big_string, substring) != -1:

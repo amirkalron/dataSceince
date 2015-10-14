@@ -16,12 +16,12 @@ from enum import Enum
 
 
 ### features ###
-allFeatures = ["Pclass", "Sex", "Parch", "Fare", "Embarked","Title","ShortTitle","Deck","AgeGroup","Age*Class","FareCategory","falimiy_freq"]
-selectedFeatures = ["Age*Class", "Sex","ShortTitle","Fare","Deck","AgeGroup","falimiy_freq" ] 
+allFeatures = ["Pclass", "Sex", "Parch", "Fare", "Embarked","Title","ShortTitle","Deck","AgeGroup","Age*Class","FareC","falimiy_freq"]
+selectedFeatures = ["Sex","Age*Class","ShortTitle","Deck"] 
 
 ### variables ###
 age_groups = [[1,0,1],[2,1,5],[3,5,16],[4,16,25],[5,25,40],[6,40,60],[7,60,999]]
-title_mapping = {"Mr": 1, "Miss": 2, "Mrs": 3, "Master": 4, "Dr": 5, "Rev": 6, "Major": 7, "Col": 7, "Mlle": 8, "Mme": 8, "Don": 9, "Lady": 10, "Countess": 10, "Jonkheer": 10, "Sir": 9, "Capt": 7, "Ms": 2} 
+title_mapping = {"Mr": 1, "Dr": 2, "Mrs": 3, "Master": 4, "Col": 5, "Rev": 6, "Major": 7, "Miss": 7, "Mlle": 8, "Mme": 8, "": 9, "Lady": 10, "Countess": 10, "Jonkheer": 10, "Sir": 9, "Capt": 7, "Ms": 2} 
 cabin_list = ['A', 'B', 'C', 'D', 'E', 'F', 'T', 'G', 'Unknown']
 
 ###########################################
@@ -49,17 +49,18 @@ def normalizeData(data):
  	data["falimiy_freq"]=data["FamilyId"].apply(lambda fid : family_id_freq.loc[fid])
  	data.loc[data["falimiy_freq"] <= 2, "FamilyId"] = "TooSmall"
  	data["IsBaby"]=data["Age"].apply(lambda age : isBaby(age))
- 	createCategory(data,"Fare","FareCategory",10,40)
+ 	createCategory(data,"Fare","FareC",10,40)
  	data["Fare"] = data["Fare"].apply(lambda fare : getFare(fare) )
     
  
 def getAlgs():
-# 	return [["DecisionTreeClassifier",DecisionTreeClassifier(random_state=0),allFeatures,1]]
+ #return [["DecisionTreeClassifier",DecisionTreeClassifier(random_state=0,max_features=3, min_samples_split=6, min_samples_leaf=3),selectedFeatures,1]]
+ return [["DecisionTreeClassifier",RandomForestClassifier(random_state=0,n_estimators=250,max_depth=3, min_samples_leaf=6),selectedFeatures,1]]
 	
-	return  [["ranodom forest",
-			RandomForestClassifier(random_state=1, n_estimators=250,max_features=2, min_samples_split=6, min_samples_leaf=3),
-			selectedFeatures,
-			2]]
+# 	return  [["ranodom forest",
+# 			RandomForestClassifier(random_state=1, n_estimators=250,max_features=2, min_samples_split=6, min_samples_leaf=3),
+# 			selectedFeatures,
+# 			2]]
 # 	  	 ["gradient boosting",GradientBoostingClassifier(random_state=1, n_estimators=10, max_depth=3),
 # 			["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked", "Title","FamilyId","Deck","IsBaby"],2],
 # 	  	 ["logistic regression",LogisticRegression(random_state=1),
