@@ -53,9 +53,9 @@ def normalizeData(data):
  	data["Fare"] = data["Fare"].apply(lambda fare : getFare(fare) )
     
  
-def getAlgs():
+def getClassifiers():
  #return [["DecisionTreeClassifier",DecisionTreeClassifier(random_state=0,max_features=3, min_samples_split=6, min_samples_leaf=3),selectedFeatures,1]]
- return [["DecisionTreeClassifier",RandomForestClassifier(random_state=0,n_estimators=250,max_depth=3, min_samples_leaf=6),selectedFeatures,1]]
+ return [["DecisionTreeClassifier",RandomForestClassifier(random_state=0,n_estimators=10,max_depth=4, min_samples_leaf=6),selectedFeatures,1]]
 	
 # 	return  [["ranodom forest",
 # 			RandomForestClassifier(random_state=1, n_estimators=250,max_features=2, min_samples_split=6, min_samples_leaf=3),

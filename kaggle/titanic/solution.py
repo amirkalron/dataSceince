@@ -26,13 +26,13 @@ normalizeData(trainData)
 analysFeatures(trainData)
 
 # Estimate prediction rate
-algs = getAlgs()
-names = [ i[0]  for i in algs]
+classifiers = getClassifiers()
+names = [ i[0]  for i in classifiers]
 print ("solution using : " + "".join(names))
 value_column="Survived"
 
-for name,alg,p,w in algs: 
-        score = sklearn.cross_validation.cross_val_score(alg, trainData[p], trainData[value_column], cv=3)
+for name,clf,p,w in classifiers: 
+        score = sklearn.cross_validation.cross_val_score(clf, trainData[p], trainData[value_column], cv=3)
         print (score.mean())
 
 ###########################################
@@ -43,14 +43,14 @@ normalizeData(testData)
 
 #train + predict
 full_predictions = [0]*len(testData)
-algs = getAlgs()
-for name,alg,p,w in algs:
-    alg = alg.fit(trainData[p], trainData[value_column])
-    plotClassifier(alg,name)
-    predictions = alg.predict_proba(testData[p].astype(float))[:,1]
+classifiers = getClassifiers()
+for name,clf,p,w in classifiers:
+    clf = clf.fit(trainData[p], trainData[value_column])
+    plotClassifier(clf,name)
+    predictions = clf.predict_proba(testData[p].astype(float))[:,1]
     full_predictions = full_predictions +  predictions * w
 
-totalW = sum([ i[3] for i in algs ])
+totalW = sum([ i[3] for i in classifiers ])
 full_predictions = full_predictions / totalW 
 full_predictions[full_predictions <= .5] = 0 
 full_predictions[full_predictions > .5] = 1

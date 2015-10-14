@@ -6,10 +6,10 @@ import os
 from props import  * 
 
 def plotClassifier(clf,name):
-    if clf.estimators_ is not None:
+    if hasattr(clf, "estimators_") :
         for id,estimator in enumerate(clf.estimators_): 
             __plotTree(estimator,name + str(id) )
-    if clf.tree is not None:
+    if hasattr(clf, "tree_"):
         __plotTree(clf,name);   
         
     
